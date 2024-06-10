@@ -12,33 +12,32 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
+        'level_id',
+        'nama',
+        'username',
         'email',
         'password',
+        'jenis_kelamin',
+        'alamat',
+        'nomor_telpon',
+        'status',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be cast to native types.
      *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'status' => 'boolean',
     ];
+
+    /**
+     * Get the level that owns the user.
+     */
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
 }
